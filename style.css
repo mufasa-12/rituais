@@ -3,134 +3,242 @@
     font-family: 'SigilosDeConhecimento';
     src: url('assets/fonts/SigilosDeConhecimento.ttf') format('truetype');
     /* Certifique-se que o caminho e o nome do arquivo da fonte estão corretos.
-       O arquivo SigilosDeConhecimento.ttf deve estar em uma pasta 'assets/fonts/'
+       O arquivo SigilosDeConhecimento.ttf deve estar numa pasta 'assets/fonts/'
        relativa a este arquivo CSS. */
     font-weight: normal;
     font-style: normal;
 }
 
 body {
-    font-family: 'SigilosDeConhecimento', sans-serif; /* Fallback para sans-serif */
-    background-color: #1a1a2e; /* Fundo escuro místico */
-    color: #e0e0e0; /* Cor de texto clara */
+    font-family: 'SigilosDeConhecimento', sans-serif;
+    background-color: #12121a; /* Fundo escuro ligeiramente diferente */
+    color: #e0e0e0;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Evitar scroll horizontal */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-.site-header {
-    background-color: #100f1c; /* Um pouco mais escuro que o body */
+.site-container {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 280px;
+    background-color: #1a1a2e; /* Cor da sidebar */
     padding: 20px;
-    text-align: center;
-    border-bottom: 2px solid #4b0082; /* Indigo/Roxo para um toque místico */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-right: 2px solid #4b0082; /* Borda mística */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Espaço entre as seções */
+    overflow-y: auto; /* Scroll se o conteúdo for maior */
+    color: #c9a2f0; /* Cor de texto mais clara para a sidebar */
 }
 
-.site-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    color: #9370db; /* Roxo médio */
-    text-shadow: 0 0 5px #c9a2f0, 0 0 10px #c9a2f0;
+.sidebar-section h2 {
+    font-size: 1.6em;
+    color: #9370db; /* Roxo médio para títulos de seção */
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #4b0082;
+    text-shadow: 0 0 3px #c9a2f0;
 }
 
-.controls {
-    margin-top: 15px;
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); /* Grid responsivo para miniaturas */
+    gap: 10px;
 }
 
-.upload-button {
+.thumbnail-grid img,
+.thumbnail-grid .saved-composition-item {
+    width: 100%;
+    height: 70px; /* Altura fixa para miniaturas */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    border: 2px solid #4b0082;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.thumbnail-grid img:hover,
+.thumbnail-grid .saved-composition-item:hover {
+    transform: scale(1.1);
+    border-color: #9370db;
+}
+
+.sidebar-button {
+    display: block;
+    width: 100%;
     background-color: #4b0082; /* Indigo */
     color: #e0e0e0;
-    padding: 10px 20px;
+    padding: 12px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-family: 'SigilosDeConhecimento', sans-serif;
     font-size: 1em;
+    text-align: center;
+    margin-bottom: 10px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.upload-button:hover {
+.sidebar-button:hover {
     background-color: #6a0dad; /* Roxo mais claro */
     transform: translateY(-2px);
 }
 
+.sidebar-button.upload-button { /* Estilo específico se necessário, mas herda de .sidebar-button */
+    position: relative; /* Para o input file escondido */
+}
+
+.empty-panel-message {
+    font-size: 0.9em;
+    color: #aaa;
+    text-align: center;
+    grid-column: 1 / -1; /* Ocupa todas as colunas do grid */
+}
+
+/* --- Área de Desenho Principal --- */
 #drawing-area {
     flex-grow: 1;
-    position: relative; /* Necessário para posicionar as imagens absolutamente */
-    width: 100%;
-    min-height: 500px; /* Altura mínima para a área de desenho */
-    background-image: radial-gradient(circle, #2c2c54, #1a1a2e 70%); /* Gradiente sutil */
-    overflow: hidden; /* Evita que imagens arrastadas para fora causem scroll na área */
-    border-top: 1px solid #2a2a3f;
-    border-bottom: 1px solid #2a2a3f;
+    position: relative; /* Para posicionamento absoluto das imagens */
+    background-color: #ffffff; /* Área de desenho branca */
+    background-image: 
+        linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px; /* Tamanho do padrão de grade */
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px; /* Posição para efeito de grade */
+    overflow: hidden; /* Evita que imagens arrastadas para fora causem scroll */
+    color: #333; /* Cor de texto para o placeholder */
+}
+
+.drawing-area-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: #999;
+    pointer-events: none; /* Para não interferir com o drag and drop */
+    text-align: center;
 }
 
 #drawing-area img {
-    position: absolute; /* Permite arrastar */
+    position: absolute;
     cursor: grab;
-    max-width: 100%; /* Garante que a imagem não seja maior que o container inicialmente */
+    border: 2px solid transparent;
+    border-radius: 3px;
+    transition: transform 0.1s linear, border-color 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+    max-width: 100%; /* Para evitar que imagens muito grandes quebrem o layout ao serem adicionadas */
     height: auto;
-    border: 2px solid transparent; /* Borda sutil, pode ser estilizada ao interagir */
-    border-radius: 5px; /* Cantos arredondados suaves */
-    transition: transform 0.1s linear, border-color 0.3s ease; /* Transição suave para zoom */
-    user-select: none; /* Impede a seleção de texto da imagem ao arrastar */
-    -webkit-user-drag: none; /* Impede o comportamento de arrastar nativo do navegador */
+    /* Sombra sutil para dar profundidade */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-#drawing-area img:active {
-    cursor: grabbing;
-    border-color: #9370db; /* Destaca imagem ativa */
-    z-index: 1000; /* Traz a imagem para frente ao ser arrastada */
-}
-
+#drawing-area img:active,
 #drawing-area img.dragging {
-    box-shadow: 0 0 15px rgba(147, 112, 219, 0.7); /* Sombra roxa ao arrastar */
+    cursor: grabbing;
+    border-color: #6a0dad; /* Roxo ao interagir */
+    box-shadow: 0 0 15px rgba(106, 13, 173, 0.5); /* Sombra roxa mais intensa */
+    z-index: 1000; /* Traz a imagem para frente */
 }
 
+/* --- Rodapé --- */
 footer {
     background-color: #100f1c;
     text-align: center;
     padding: 15px;
     font-size: 0.9em;
     border-top: 1px solid #4b0082;
+    color: #aaa;
+    width: 100%;
+    box-sizing: border-box; /* Garante que padding não aumente a largura total */
 }
 
-/* Responsividade */
+/* --- Responsividade --- */
 @media (max-width: 768px) {
-    .site-header h1 {
-        font-size: 2em;
+    .site-container {
+        flex-direction: column-reverse; /* Sidebar em baixo em telas menores */
     }
 
-    .upload-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
+    .sidebar {
+        width: 100%;
+        height: auto; /* Altura automática para a sidebar */
+        max-height: 40vh; /* Limita a altura da sidebar em telas pequenas */
+        border-right: none;
+        border-top: 2px solid #4b0082;
+        padding: 15px;
+    }
+
+    .sidebar-section h2 {
+        font-size: 1.4em;
+    }
+
+    .thumbnail-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 8px;
+    }
+    .thumbnail-grid img,
+    .thumbnail-grid .saved-composition-item {
+        height: 60px;
     }
 
     #drawing-area {
-        min-height: 400px;
-    }
-}
-
-@media (max-width: 480px) {
-    .site-header h1 {
-        font-size: 1.5em;
-    }
-    
-    .controls {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        min-height: 60vh; /* Garante espaço para desenho */
     }
 
-    .upload-button {
-        width: 80%;
-        max-width: 250px;
+    .drawing-area-placeholder {
+        font-size: 1.2em;
     }
 
     footer {
         font-size: 0.8em;
     }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        max-height: 35vh;
+    }
+    .sidebar-section h2 {
+        font-size: 1.2em;
+    }
+    .sidebar-button {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .thumbnail-grid {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    }
+    .thumbnail-grid img,
+    .thumbnail-grid .saved-composition-item {
+        height: 50px;
+    }
+}
+
+/* Estilos para item de composição salva, se for diferente de uma simples imagem */
+.saved-composition-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a2a3f; /* Cor de fundo para item de composição */
+    color: #e0e0e0;
+    font-size: 0.7em; /* Tamanho de fonte menor para o nome */
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    overflow: hidden; /* Para cortar texto longo */
+    word-break: break-all;
 }
