@@ -6,11 +6,13 @@
 // Certifique-se de que as imagens existam nesses caminhos.
 
 const initialSigils = [
-    { id: "sigil_001", name: "Sigilo Alfa", src: "https://placehold.co/150x150/1a1a2e/e0e0e0?text=Alfa&font=lora" },
-    { id: "sigil_002", name: "Arcano Beta", src: "https://placehold.co/120x120/1a1a2e/c9a2f0?text=Beta&font=lora" },
-    { id: "sigil_003", name: "Poder Gama", src: "https://placehold.co/180x180/1a1a2e/9370db?text=Gama&font=lora" },
-    { id: "sigil_004", name: "Elixir Delta", src: "https://placehold.co/100x150/1a1a2e/e0e0e0?text=Delta&font=lora" },
-    { id: "sigil_005", name: "Chave Ômega", src: "https://placehold.co/150x100/1a1a2e/c9a2f0?text=Ômega&font=lora" },
+    { id: "sigil_001", name: "Bola", src: "bola.png" },
+    { id: "sigil_002", name: "Circulo", src: "circulo.png" },
+    { id: "sigil_003", name: "garra", src: "garra.png" },
+    { id: "sigil_004", name: "linhas", src: "linhas.png" },
+    { id: "sigil_005", name: "Meio Circulo", src: "meio circulo.png" },
+    { id: "sigil_006", name: "Quadrado", src: "quadrado.png" },
+    { id: "sigil_007", name: "Quadrado", src: "quadrado.png" },
     // Adicione mais objetos de sigilos aqui, cada um com id, name, e src
 ];
 
