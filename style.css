@@ -1,0 +1,136 @@
+/* Definição da fonte personalizada */
+@font-face {
+    font-family: 'SigilosDeConhecimento';
+    src: url('assets/fonts/SigilosDeConhecimento.ttf') format('truetype');
+    /* Certifique-se que o caminho e o nome do arquivo da fonte estão corretos.
+       O arquivo SigilosDeConhecimento.ttf deve estar em uma pasta 'assets/fonts/'
+       relativa a este arquivo CSS. */
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'SigilosDeConhecimento', sans-serif; /* Fallback para sans-serif */
+    background-color: #1a1a2e; /* Fundo escuro místico */
+    color: #e0e0e0; /* Cor de texto clara */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evitar scroll horizontal */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site-header {
+    background-color: #100f1c; /* Um pouco mais escuro que o body */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #4b0082; /* Indigo/Roxo para um toque místico */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.site-header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #9370db; /* Roxo médio */
+    text-shadow: 0 0 5px #c9a2f0, 0 0 10px #c9a2f0;
+}
+
+.controls {
+    margin-top: 15px;
+}
+
+.upload-button {
+    background-color: #4b0082; /* Indigo */
+    color: #e0e0e0;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'SigilosDeConhecimento', sans-serif;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upload-button:hover {
+    background-color: #6a0dad; /* Roxo mais claro */
+    transform: translateY(-2px);
+}
+
+#drawing-area {
+    flex-grow: 1;
+    position: relative; /* Necessário para posicionar as imagens absolutamente */
+    width: 100%;
+    min-height: 500px; /* Altura mínima para a área de desenho */
+    background-image: radial-gradient(circle, #2c2c54, #1a1a2e 70%); /* Gradiente sutil */
+    overflow: hidden; /* Evita que imagens arrastadas para fora causem scroll na área */
+    border-top: 1px solid #2a2a3f;
+    border-bottom: 1px solid #2a2a3f;
+}
+
+#drawing-area img {
+    position: absolute; /* Permite arrastar */
+    cursor: grab;
+    max-width: 100%; /* Garante que a imagem não seja maior que o container inicialmente */
+    height: auto;
+    border: 2px solid transparent; /* Borda sutil, pode ser estilizada ao interagir */
+    border-radius: 5px; /* Cantos arredondados suaves */
+    transition: transform 0.1s linear, border-color 0.3s ease; /* Transição suave para zoom */
+    user-select: none; /* Impede a seleção de texto da imagem ao arrastar */
+    -webkit-user-drag: none; /* Impede o comportamento de arrastar nativo do navegador */
+}
+
+#drawing-area img:active {
+    cursor: grabbing;
+    border-color: #9370db; /* Destaca imagem ativa */
+    z-index: 1000; /* Traz a imagem para frente ao ser arrastada */
+}
+
+#drawing-area img.dragging {
+    box-shadow: 0 0 15px rgba(147, 112, 219, 0.7); /* Sombra roxa ao arrastar */
+}
+
+footer {
+    background-color: #100f1c;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9em;
+    border-top: 1px solid #4b0082;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .site-header h1 {
+        font-size: 2em;
+    }
+
+    .upload-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    #drawing-area {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header h1 {
+        font-size: 1.5em;
+    }
+    
+    .controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .upload-button {
+        width: 80%;
+        max-width: 250px;
+    }
+
+    footer {
+        font-size: 0.8em;
+    }
+}
