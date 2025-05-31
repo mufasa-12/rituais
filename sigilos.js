@@ -12,7 +12,6 @@ const initialSigils = [
     { id: "sigil_004", name: "linhas", src: "linhas.png" },
     { id: "sigil_005", name: "Meio Circulo", src: "meio circulo.png" },
     { id: "sigil_006", name: "Quadrado", src: "quadrado.png" },
-    { id: "sigil_007", name: "Quadrado", src: "quadrado.png" },
     // Adicione mais objetos de sigilos aqui, cada um com id, name, e src
 ];
 
