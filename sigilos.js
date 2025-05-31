@@ -6,12 +6,14 @@
 // Certifique-se de que as imagens existam nesses caminhos.
 
 const initialSigils = [
-    { id: "sigil_001", name: "Bola", src: "bola.png" },
-    { id: "sigil_002", name: "Circulo", src: "circulo.png" },
-    { id: "sigil_003", name: "garra", src: "garra.png" },
-    { id: "sigil_004", name: "linhas", src: "linhas.png" },
-    { id: "sigil_005", name: "Meio Circulo", src: "meio circulo.png" },
-    { id: "sigil_006", name: "Quadrado", src: "quadrado.png" },
+    { id: "sigil_001", name: "Bola", src: "assets/sigils/bola.png" },
+    { id: "sigil_002", name: "Círculo", src: "assets/sigils/circulo.png" },
+    { id: "sigil_003", name: "Garra", src: "assets/sigils/garra.png" },
+    { id: "sigil_004", name: "Linhas", src: "assets/sigils/linhas.png" },
+    { id: "sigil_005", name: "Meio Círculo", src: "assets/sigils/meio-circulo.png" },
+    { id: "sigil_006", name: "Quadrado", src: "assets/sigils/quadrado.png" }
+];
+
     // Adicione mais objetos de sigilos aqui, cada um com id, name, e src
 ];
 
