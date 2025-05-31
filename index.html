@@ -3,20 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Círculo de Sigilos</title>
+    <title>Editor de Sigilos Mágicos</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    </head>
 <body>
-    <header class="site-header">
-        <h1>Círculo de Sigilos Mágicos</h1>
-        <div class="controls">
-            <label for="imageUpload" class="upload-button">Carregar Novo Sigilo</label>
-            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-        </div>
-    </header>
+    <div class="site-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h2>Meus Sigilos</h2>
+                <div id="thumbnail-container" class="thumbnail-grid">
+                    </div>
+            </div>
 
-    <main id="drawing-area">
+            <div class="sidebar-section">
+                <h2>Ferramentas</h2>
+                <label for="imageUpload" class="sidebar-button upload-button">
+                    Carregar Novo Sigilo
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                </label>
+                <button id="saveCompositionButton" class="sidebar-button">Salvar Composição</button>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Composições Salvas</h2>
+                <div id="saved-compositions-panel" class="thumbnail-grid">
+                    <p class="empty-panel-message">Nenhuma composição salva ainda.</p>
+                </div>
+            </div>
+        </aside>
+
+        <main id="drawing-area">
+            <p class="drawing-area-placeholder">Arraste sigilos da barra lateral ou carregue novos para começar.</p>
         </main>
+    </div>
 
     <footer>
         <p>Arraste para mover, use o scroll do mouse sobre um sigilo para redimensionar.</p>
